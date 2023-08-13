@@ -1,0 +1,208 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "mahimazuredatafactory"
+		},
+		"AzureDataLakeStorage1_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage1'"
+		},
+		"AzureSqlDatabase_param_LS_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase_param_LS'",
+			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=mahimservert1.database.windows.net;Initial Catalog=mahimdatabaset1;User ID=@{linkedService().userName};Password=@{linkedService().password}"
+		},
+		"AzureSqlDatabase_source_gc_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase_source_gc'",
+			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=mahimserver.database.windows.net;Initial Catalog=mahimdatabase;User ID=mahim"
+		},
+		"mahim_SQL_DB_t1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'mahim_SQL_DB_t1'"
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://mahimstorageaccount.dfs.core.windows.net/"
+		},
+		"AzureDataLakeStoragegeekcoders_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://mahimstorageaccount.dfs.core.windows.net/"
+		},
+		"AzureDataLakeStoragegeekcoders_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "372bb24a-e2a3-4e26-8672-057a0a2661ef"
+		},
+		"AzureDataLakeStoragegeekcoders_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "4f2571f6-d8dd-43a3-8928-fd0c4291ccd3"
+		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://mahimkeyvault.vault.azure.net/"
+		},
+		"RestService_LS_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://restcountries.com/v3.1/name/"
+		},
+		"RestService_source_gc_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://airlabs.co/api/v9/airlines"
+		},
+		"storagetrigger_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/1ac442b9-ef2b-4b60-ad29-39ffe3d77f0c/resourceGroups/mahim_RG/providers/Microsoft.Storage/storageAccounts/mahimstorageaccount"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "mahimazuredatafactory_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzureDataLakeStorage1_accountKey": {
+						"value": "[parameters('AzureDataLakeStorage1_accountKey')]"
+					},
+					"AzureSqlDatabase_param_LS_connectionString": {
+						"value": "[parameters('AzureSqlDatabase_param_LS_connectionString')]"
+					},
+					"mahim_SQL_DB_t1_connectionString": {
+						"value": "[parameters('mahim_SQL_DB_t1_connectionString')]"
+					},
+					"AzureDataLakeStorage1_properties_typeProperties_url": {
+						"value": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]"
+					},
+					"AzureKeyVault1_properties_typeProperties_baseUrl": {
+						"value": "[parameters('AzureKeyVault1_properties_typeProperties_baseUrl')]"
+					},
+					"RestService_LS_properties_typeProperties_url": {
+						"value": "[parameters('RestService_LS_properties_typeProperties_url')]"
+					},
+					"RestService_source_gc_properties_typeProperties_url": {
+						"value": "[parameters('RestService_source_gc_properties_typeProperties_url')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "mahimazuredatafactory_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'mahimazuredatafactory_ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "mahimazuredatafactory_ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzureSqlDatabase_source_gc_connectionString": {
+						"value": "[parameters('AzureSqlDatabase_source_gc_connectionString')]"
+					},
+					"AzureDataLakeStoragegeekcoders_properties_typeProperties_url": {
+						"value": "[parameters('AzureDataLakeStoragegeekcoders_properties_typeProperties_url')]"
+					},
+					"AzureDataLakeStoragegeekcoders_properties_typeProperties_tenant": {
+						"value": "[parameters('AzureDataLakeStoragegeekcoders_properties_typeProperties_tenant')]"
+					},
+					"AzureDataLakeStoragegeekcoders_properties_typeProperties_servicePrincipalId": {
+						"value": "[parameters('AzureDataLakeStoragegeekcoders_properties_typeProperties_servicePrincipalId')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'mahimazuredatafactory_ArmTemplate_1')]"
+			]
+		},
+		{
+			"name": "mahimazuredatafactory_ArmTemplate_3",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_3.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'mahimazuredatafactory_ArmTemplate_2')]"
+			]
+		},
+		{
+			"name": "mahimazuredatafactory_ArmTemplate_4",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_4.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"storagetrigger_properties_typeProperties_scope": {
+						"value": "[parameters('storagetrigger_properties_typeProperties_scope')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'mahimazuredatafactory_ArmTemplate_3')]"
+			]
+		}
+	]
+}

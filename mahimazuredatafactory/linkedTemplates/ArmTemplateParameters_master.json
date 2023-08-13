@@ -1,0 +1,51 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "mahimazuredatafactory"
+		},
+		"AzureDataLakeStorage1_accountKey": {
+			"value": ""
+		},
+		"AzureSqlDatabase_param_LS_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=mahimservert1.database.windows.net;Initial Catalog=mahimdatabaset1;User ID=@{linkedService().userName};Password=@{linkedService().password}"
+		},
+		"AzureSqlDatabase_source_gc_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=mahimserver.database.windows.net;Initial Catalog=mahimdatabase;User ID=mahim"
+		},
+		"mahim_SQL_DB_t1_connectionString": {
+			"value": ""
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://mahimstorageaccount.dfs.core.windows.net/"
+		},
+		"AzureDataLakeStoragegeekcoders_properties_typeProperties_url": {
+			"value": "https://mahimstorageaccount.dfs.core.windows.net/"
+		},
+		"AzureDataLakeStoragegeekcoders_properties_typeProperties_tenant": {
+			"value": "372bb24a-e2a3-4e26-8672-057a0a2661ef"
+		},
+		"AzureDataLakeStoragegeekcoders_properties_typeProperties_servicePrincipalId": {
+			"value": "4f2571f6-d8dd-43a3-8928-fd0c4291ccd3"
+		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"value": "https://mahimkeyvault.vault.azure.net/"
+		},
+		"RestService_LS_properties_typeProperties_url": {
+			"value": "https://restcountries.com/v3.1/name/"
+		},
+		"RestService_source_gc_properties_typeProperties_url": {
+			"value": "https://airlabs.co/api/v9/airlines"
+		},
+		"storagetrigger_properties_typeProperties_scope": {
+			"value": "/subscriptions/1ac442b9-ef2b-4b60-ad29-39ffe3d77f0c/resourceGroups/mahim_RG/providers/Microsoft.Storage/storageAccounts/mahimstorageaccount"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
