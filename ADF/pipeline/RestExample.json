@@ -1,0 +1,93 @@
+{
+	"name": "RestExample",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "RestSource",
+						"httpRequestTimeout": "00:01:40",
+						"requestInterval": "00.00:00:00.010",
+						"requestMethod": "GET",
+						"paginationRules": {
+							"supportRFC5988": "true"
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "Rest_DS",
+						"type": "DatasetReference",
+						"parameters": {
+							"relativeURL": "spain"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "mahim_generic_adls_csv_ds",
+						"type": "DatasetReference",
+						"parameters": {
+							"folderPath": "Rest_Output"
+						}
+					}
+				]
+			},
+			{
+				"name": "Web Activity",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Copy data1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://prod-28.eastus.logic.azure.com:443/workflows/645b1f2e762d4aa6be37bf086f989700/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=vPdBFHwF_QG7Xuock6-H9Yh5mQbLYivvHM8SBjlNtiA",
+					"method": "POST",
+					"body": {
+						"PipelineName": "Rest API Pipeline",
+						"Status": "Success",
+						"RecepientEmailID": "9khanmahim@gmail.com"
+					}
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2023-04-08T03:19:23Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,22 @@
+{
+	"name": "AzureDataLakeStoragegeekcoders",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://mahimstorageaccount.dfs.core.windows.net/",
+			"tenant": "372bb24a-e2a3-4e26-8672-057a0a2661ef",
+			"servicePrincipalId": "4f2571f6-d8dd-43a3-8928-fd0c4291ccd3",
+			"servicePrincipalCredentialType": "ServicePrincipalKey",
+			"servicePrincipalCredential": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AzureKeyVault1",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "data-app-secret"
+			}
+		}
+	}
+}

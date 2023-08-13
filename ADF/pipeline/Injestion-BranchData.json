@@ -1,0 +1,68 @@
+{
+	"name": "Injestion-BranchData",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy SQLDB to ADLS Branch Info",
+				"description": "Copy SQLDB to ADLS Branch Info",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SQL_DB_DS_Genric_Policy_Project",
+						"type": "DatasetReference",
+						"parameters": {
+							"schemaName": "dbo",
+							"tableName": "Branch"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Parquet_ADLS_DS_Policy_Project",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "Policy Project"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-05-20T14:18:45Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

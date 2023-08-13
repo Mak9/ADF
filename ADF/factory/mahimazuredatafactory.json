@@ -1,0 +1,14 @@
+{
+	"name": "mahimazuredatafactory",
+	"properties": {
+		"globalConfigurations": {
+			"PipelineBillingEnabled": "true"
+		}
+	},
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "37202437-ec14-47e5-a2b2-f2b94989fc6f",
+		"tenantId": "372bb24a-e2a3-4e26-8672-057a0a2661ef"
+	}
+}

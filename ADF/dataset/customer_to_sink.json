@@ -1,0 +1,17 @@
+{
+	"name": "customer_to_sink",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "mahim_SQL_DB_t1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "SalesLT",
+			"table": "CustomerCopy"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

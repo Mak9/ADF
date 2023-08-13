@@ -1,0 +1,158 @@
+{
+	"name": "SCD3",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "SCD3_DS",
+						"type": "DatasetReference"
+					},
+					"name": "SCD3updatestable"
+				},
+				{
+					"dataset": {
+						"referenceName": "SCD3_TXT_DS",
+						"type": "DatasetReference"
+					},
+					"name": "SCD3updatescsv"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "SCD3SINK_DS",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				},
+				{
+					"dataset": {
+						"referenceName": "SCD3SINK_DS",
+						"type": "DatasetReference"
+					},
+					"name": "sink2"
+				}
+			],
+			"transformations": [
+				{
+					"name": "lookup1"
+				},
+				{
+					"name": "select1"
+				},
+				{
+					"name": "filter1"
+				},
+				{
+					"name": "AlterRow1"
+				},
+				{
+					"name": "lookup2"
+				},
+				{
+					"name": "select2"
+				},
+				{
+					"name": "filter2"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          id as integer,",
+				"          name as string,",
+				"          city as string,",
+				"          city_old as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> SCD3updatestable",
+				"source(output(",
+				"          id as integer,",
+				"          name as string,",
+				"          city as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> SCD3updatescsv",
+				"SCD3updatestable, SCD3updatescsv lookup(SCD3updatestable@id == SCD3updatescsv@id,",
+				"     multiple: false,",
+				"     pickup: 'any',",
+				"     broadcast: 'auto')~> lookup1",
+				"lookup1 select(mapColumn(",
+				"          id = SCD3updatestable@id,",
+				"          name = SCD3updatestable@name,",
+				"          city = SCD3updatestable@city,",
+				"          city_old,",
+				"          id = SCD3updatescsv@id,",
+				"          city_new = SCD3updatescsv@city",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 filter(!isNull(city_new)) ~> filter1",
+				"filter1 alterRow(updateIf(!isNull(city_new))) ~> AlterRow1",
+				"SCD3updatescsv, SCD3updatestable lookup(SCD3updatescsv@id == SCD3updatestable@id,",
+				"     multiple: false,",
+				"     pickup: 'any',",
+				"     broadcast: 'auto')~> lookup2",
+				"lookup2 select(mapColumn(",
+				"          id_csv = SCD3updatescsv@id,",
+				"          name_csv = SCD3updatescsv@name,",
+				"          city_csv = SCD3updatescsv@city,",
+				"          id_table = SCD3updatestable@id",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select2",
+				"select2 filter(isNull(id_table)) ~> filter2",
+				"AlterRow1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          id as integer,",
+				"          name as string,",
+				"          city as string,",
+				"          city_old as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:false,",
+				"     updateable:true,",
+				"     upsertable:false,",
+				"     keys:['id'],",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     saveOrder: 1,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          id,",
+				"          name,",
+				"          city = city_new,",
+				"          city_old = city",
+				"     )) ~> sink1",
+				"filter2 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          id as integer,",
+				"          name as string,",
+				"          city as string,",
+				"          city_old as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     saveOrder: 2,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          id = id_csv,",
+				"          name = name_csv,",
+				"          city = city_csv",
+				"     )) ~> sink2"
+			]
+		}
+	}
+}
