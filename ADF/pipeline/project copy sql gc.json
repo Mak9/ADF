@@ -74,13 +74,9 @@
 									"partitionOption": "None"
 								},
 								"sink": {
-									"type": "ParquetSink",
-									"storeSettings": {
-										"type": "AzureBlobFSWriteSettings"
-									},
-									"formatSettings": {
-										"type": "ParquetWriteSettings"
-									}
+									"type": "AzureSqlSink",
+									"writeBehavior": "insert",
+									"sqlWriterUseTableLock": false
 								},
 								"enableStaging": false,
 								"translator": {
@@ -106,8 +102,14 @@
 							],
 							"outputs": [
 								{
-									"referenceName": "Parquet_sink_gc",
-									"type": "DatasetReference"
+									"referenceName": "AzureSqlTable_sink_gc",
+									"type": "DatasetReference",
+									"parameters": {
+										"table_name": {
+											"value": "@item().publish_table_name",
+											"type": "Expression"
+										}
+									}
 								}
 							]
 						}
