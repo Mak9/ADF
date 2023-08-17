@@ -1,0 +1,16 @@
+{
+	"name": "AzureDatabricksDeltaLakeDataset_source_gc",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDatabricksDeltaLake_gc",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureDatabricksDeltaLakeDataset",
+		"typeProperties": {
+			"database": "mart_geekcoders",
+			"table": "dim_airport"
+		},
+		"schema": []
+	}
+}

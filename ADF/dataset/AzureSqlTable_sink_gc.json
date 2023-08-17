@@ -1,0 +1,16 @@
+{
+	"name": "AzureSqlTable_sink_gc",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase_sink_gc",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "airport"
+		}
+	}
+}
