@@ -5,11 +5,25 @@
 			"referenceName": "AzureDatabricksDeltaLake_gc",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"table_name": {
+				"type": "string"
+			},
+			"db_name": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "AzureDatabricksDeltaLakeDataset",
 		"typeProperties": {
-			"database": "mart_geekcoders",
-			"table": "dim_airport"
+			"database": {
+				"value": "@dataset().db_name",
+				"type": "Expression"
+			},
+			"table": {
+				"value": "@dataset().table_name",
+				"type": "Expression"
+			}
 		},
 		"schema": []
 	}
