@@ -98,6 +98,10 @@
 										"table_name": {
 											"value": "@item().source_table_name",
 											"type": "Expression"
+										},
+										"db_name": {
+											"value": "@item().database_name",
+											"type": "Expression"
 										}
 									}
 								}
