@@ -105,7 +105,13 @@
 							"outputs": [
 								{
 									"referenceName": "AzureSqlTable_sink_gc",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"table_name": {
+											"value": "@item().publish_table_name",
+											"type": "Expression"
+										}
+									}
 								}
 							]
 						}
