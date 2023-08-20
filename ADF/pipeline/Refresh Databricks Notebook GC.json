@@ -14,12 +14,26 @@
 					"secureInput": false
 				},
 				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Shared/project_gc/Run_Notebooks",
+					"baseParameters": {
+						"Layer_Name": {
+							"value": "@pipeline().parameters.Layer_Name",
+							"type": "Expression"
+						}
+					}
+				},
 				"linkedServiceName": {
 					"referenceName": "AzureDatabricks_GC",
 					"type": "LinkedServiceReference"
 				}
 			}
 		],
+		"parameters": {
+			"Layer_Name": {
+				"type": "string"
+			}
+		},
 		"annotations": []
 	}
 }
