@@ -1,0 +1,21 @@
+{
+	"name": "practice_sql",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "mahim_SQL_DB_t1",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"schema": {
+				"type": "string",
+				"defaultValue": "saleslt"
+			},
+			"tablename": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	}
+}
