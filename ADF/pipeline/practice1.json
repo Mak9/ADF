@@ -46,14 +46,18 @@
 						"referenceName": "practice_sql",
 						"type": "DatasetReference",
 						"parameters": {
-							"schema": "saleslt"
+							"schema": "saleslt",
+							"tablename": "product"
 						}
 					}
 				],
 				"outputs": [
 					{
 						"referenceName": "practice_csv",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"path": "output29sept"
+						}
 					}
 				]
 			}
