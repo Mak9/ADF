@@ -2,15 +2,16 @@
 	"name": "AzureSqlTable1",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureSqlDatabase_param_LS",
-			"type": "LinkedServiceReference",
-			"parameters": {
-				"userName": "mahim"
-			}
+			"referenceName": "mahim_SQL_DB_t1",
+			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
 		"type": "AzureSqlTable",
-		"schema": []
+		"schema": [],
+		"typeProperties": {
+			"schema": "SalesLT",
+			"table": "Address"
+		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
 }
