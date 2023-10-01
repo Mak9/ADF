@@ -2,15 +2,15 @@
 	"name": "tumblingWindow",
 	"properties": {
 		"annotations": [],
-		"runtimeState": "Started",
+		"runtimeState": "Stopped",
 		"pipeline": {
 			"pipelineReference": {
 				"referenceName": "practice2",
 				"type": "PipelineReference"
 			},
 			"parameters": {
-				"start": "@trigger().outputs.windowStartTime",
-				"end": "@trigger().outputs.windowEndTime"
+				"startp": "@trigger().outputs.windowStartTime",
+				"endp": "@trigger().outputs.windowEndTime"
 			}
 		},
 		"type": "TumblingWindowTrigger",

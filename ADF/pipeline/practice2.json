@@ -14,7 +14,7 @@
 				"typeProperties": {
 					"variableName": "start",
 					"value": {
-						"value": "@pipeline().parameters.start",
+						"value": "@pipeline().parameters.startp",
 						"type": "Expression"
 					}
 				}
@@ -31,18 +31,18 @@
 				"typeProperties": {
 					"variableName": "end",
 					"value": {
-						"value": "@pipeline().parameters.end",
+						"value": "@pipeline().parameters.endp",
 						"type": "Expression"
 					}
 				}
 			}
 		],
 		"parameters": {
-			"start": {
+			"startp": {
 				"type": "string",
 				"defaultValue": "@trigger().outputs.windowStartTime"
 			},
-			"end": {
+			"endp": {
 				"type": "string",
 				"defaultValue": "@trigger().outputs.windowEndTime"
 			}
