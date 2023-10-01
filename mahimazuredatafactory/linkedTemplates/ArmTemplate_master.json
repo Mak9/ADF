@@ -73,9 +73,13 @@
 			"type": "string",
 			"defaultValue": "https://airlabs.co/api/v9/airlines"
 		},
-		"storagetrigger_properties_typeProperties_scope": {
+		"tumbling_properties_pipeline_parameters_startp": {
 			"type": "string",
-			"defaultValue": "/subscriptions/1ac442b9-ef2b-4b60-ad29-39ffe3d77f0c/resourceGroups/mahim_RG/providers/Microsoft.Storage/storageAccounts/mahimstorageaccount"
+			"defaultValue": "@trigger.outputs.windowStartTime"
+		},
+		"tumbling_properties_pipeline_parameters_endp": {
+			"type": "string",
+			"defaultValue": "@trigger.outputs.windowEndTime"
 		},
 		"containerUri": {
 			"type": "string",
@@ -189,6 +193,12 @@
 					},
 					"AzureDataLakeStoragegeekcoders_properties_typeProperties_servicePrincipalId": {
 						"value": "[parameters('AzureDataLakeStoragegeekcoders_properties_typeProperties_servicePrincipalId')]"
+					},
+					"tumbling_properties_pipeline_parameters_startp": {
+						"value": "[parameters('tumbling_properties_pipeline_parameters_startp')]"
+					},
+					"tumbling_properties_pipeline_parameters_endp": {
+						"value": "[parameters('tumbling_properties_pipeline_parameters_endp')]"
 					}
 				}
 			},
@@ -249,9 +259,6 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
-					},
-					"storagetrigger_properties_typeProperties_scope": {
-						"value": "[parameters('storagetrigger_properties_typeProperties_scope')]"
 					}
 				}
 			},

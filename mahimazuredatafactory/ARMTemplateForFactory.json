@@ -73,9 +73,13 @@
 			"type": "string",
 			"defaultValue": "https://airlabs.co/api/v9/airlines"
 		},
-		"storagetrigger_properties_typeProperties_scope": {
+		"tumbling_properties_pipeline_parameters_startp": {
 			"type": "string",
-			"defaultValue": "/subscriptions/1ac442b9-ef2b-4b60-ad29-39ffe3d77f0c/resourceGroups/mahim_RG/providers/Microsoft.Storage/storageAccounts/mahimstorageaccount"
+			"defaultValue": "@trigger.outputs.windowStartTime"
+		},
+		"tumbling_properties_pipeline_parameters_endp": {
+			"type": "string",
+			"defaultValue": "@trigger.outputs.windowEndTime"
 		}
 	},
 	"variables": {
@@ -2982,7 +2986,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/practice2')]",
+			"name": "[concat(parameters('factoryName'), '/practice21')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -2999,7 +3003,7 @@
 						"typeProperties": {
 							"variableName": "start",
 							"value": {
-								"value": "trigger().outputs.windowStartTime",
+								"value": "@pipeline().parameters.startp",
 								"type": "Expression"
 							}
 						}
@@ -3016,7 +3020,7 @@
 						"typeProperties": {
 							"variableName": "end",
 							"value": {
-								"value": "trigger().outputs.windowEndTime",
+								"value": "@pipeline().parameters.endp",
 								"type": "Expression"
 							}
 						}
@@ -3024,6 +3028,14 @@
 				],
 				"policy": {
 					"elapsedTimeMetric": {}
+				},
+				"parameters": {
+					"startp": {
+						"type": "string"
+					},
+					"endp": {
+						"type": "string"
+					}
 				},
 				"variables": {
 					"start": {
@@ -6843,55 +6855,30 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/storagetrigger')]",
+			"name": "[concat(parameters('factoryName'), '/tumbling')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"annotations": [],
-				"runtimeState": "Stopped",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "triggerPipeline",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
+				"annotations": [
+					"test2"
 				],
-				"type": "BlobEventsTrigger",
-				"typeProperties": {
-					"blobPathBeginsWith": "/landing/blobs/India/",
-					"ignoreEmptyBlobs": true,
-					"scope": "[parameters('storagetrigger_properties_typeProperties_scope')]",
-					"events": [
-						"Microsoft.Storage.BlobCreated"
-					]
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/triggerPipeline')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/tumblingWindow')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
+				"runtimeState": "Stopped",
 				"pipeline": {
 					"pipelineReference": {
-						"referenceName": "practice2",
+						"referenceName": "practice21",
 						"type": "PipelineReference"
 					},
-					"parameters": {}
+					"parameters": {
+						"startp": "[parameters('tumbling_properties_pipeline_parameters_startp')]",
+						"endp": "[parameters('tumbling_properties_pipeline_parameters_endp')]"
+					}
 				},
 				"type": "TumblingWindowTrigger",
 				"typeProperties": {
-					"frequency": "Minute",
-					"interval": 5,
-					"startTime": "2023-09-29T07:43:00Z",
-					"endTime": "2023-10-02T07:50:00Z",
+					"frequency": "Hour",
+					"interval": 1,
+					"startTime": "2023-09-15T00:00:00Z",
+					"endTime": "2023-09-17T08:08:00Z",
 					"delay": "00:00:00",
 					"maxConcurrency": 50,
 					"retryPolicy": {
@@ -6901,7 +6888,7 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/practice2')]"
+				"[concat(variables('factoryId'), '/pipelines/practice21')]"
 			]
 		},
 		{

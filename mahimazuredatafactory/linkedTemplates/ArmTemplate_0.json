@@ -62,7 +62,7 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/practice2')]",
+			"name": "[concat(parameters('factoryName'), '/practice21')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -79,7 +79,7 @@
 						"typeProperties": {
 							"variableName": "start",
 							"value": {
-								"value": "trigger().outputs.windowStartTime",
+								"value": "@pipeline().parameters.startp",
 								"type": "Expression"
 							}
 						}
@@ -96,7 +96,7 @@
 						"typeProperties": {
 							"variableName": "end",
 							"value": {
-								"value": "trigger().outputs.windowEndTime",
+								"value": "@pipeline().parameters.endp",
 								"type": "Expression"
 							}
 						}
@@ -104,6 +104,14 @@
 				],
 				"policy": {
 					"elapsedTimeMetric": {}
+				},
+				"parameters": {
+					"startp": {
+						"type": "string"
+					},
+					"endp": {
+						"type": "string"
+					}
 				},
 				"variables": {
 					"start": {

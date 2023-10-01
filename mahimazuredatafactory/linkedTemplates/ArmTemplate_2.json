@@ -23,6 +23,14 @@
 		"AzureDataLakeStoragegeekcoders_properties_typeProperties_servicePrincipalId": {
 			"type": "string",
 			"defaultValue": "4f2571f6-d8dd-43a3-8928-fd0c4291ccd3"
+		},
+		"tumbling_properties_pipeline_parameters_startp": {
+			"type": "string",
+			"defaultValue": "@trigger.outputs.windowStartTime"
+		},
+		"tumbling_properties_pipeline_parameters_endp": {
+			"type": "string",
+			"defaultValue": "@trigger.outputs.windowEndTime"
 		}
 	},
 	"variables": {
@@ -852,25 +860,30 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/tumblingWindow')]",
+			"name": "[concat(parameters('factoryName'), '/tumbling')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
+				"annotations": [
+					"test2"
+				],
+				"runtimeState": "Stopped",
 				"pipeline": {
 					"pipelineReference": {
-						"referenceName": "practice2",
+						"referenceName": "practice21",
 						"type": "PipelineReference"
 					},
-					"parameters": {}
+					"parameters": {
+						"startp": "[parameters('tumbling_properties_pipeline_parameters_startp')]",
+						"endp": "[parameters('tumbling_properties_pipeline_parameters_endp')]"
+					}
 				},
 				"type": "TumblingWindowTrigger",
 				"typeProperties": {
-					"frequency": "Minute",
-					"interval": 5,
-					"startTime": "2023-09-29T07:43:00Z",
-					"endTime": "2023-10-02T07:50:00Z",
+					"frequency": "Hour",
+					"interval": 1,
+					"startTime": "2023-09-15T00:00:00Z",
+					"endTime": "2023-09-17T08:08:00Z",
 					"delay": "00:00:00",
 					"maxConcurrency": 50,
 					"retryPolicy": {
