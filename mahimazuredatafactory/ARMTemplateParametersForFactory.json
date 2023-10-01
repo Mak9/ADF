@@ -5,11 +5,23 @@
 		"factoryName": {
 			"value": "mahimazuredatafactory"
 		},
+		"AzureBlobStorage_sourceemail_gc_connectionString": {
+			"value": ""
+		},
 		"AzureDataLakeStorage1_accountKey": {
+			"value": ""
+		},
+		"AzureDatabricksDeltaLake_gc_accessToken": {
+			"value": ""
+		},
+		"AzureDatabricks_GC_accessToken": {
 			"value": ""
 		},
 		"AzureSqlDatabase_param_LS_connectionString": {
 			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=mahimservert1.database.windows.net;Initial Catalog=mahimdatabaset1;User ID=@{linkedService().userName};Password=@{linkedService().password}"
+		},
+		"AzureSqlDatabase_sink_gc_connectionString": {
+			"value": ""
 		},
 		"AzureSqlDatabase_source_gc_connectionString": {
 			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=mahimserver.database.windows.net;Initial Catalog=mahimdatabase;User ID=mahim"
@@ -28,6 +40,9 @@
 		},
 		"AzureDataLakeStoragegeekcoders_properties_typeProperties_servicePrincipalId": {
 			"value": "4f2571f6-d8dd-43a3-8928-fd0c4291ccd3"
+		},
+		"AzureDatabricks_GC_properties_typeProperties_existingClusterId": {
+			"value": "0814-062318-82nvam7v"
 		},
 		"AzureKeyVault1_properties_typeProperties_baseUrl": {
 			"value": "https://mahimkeyvault.vault.azure.net/"

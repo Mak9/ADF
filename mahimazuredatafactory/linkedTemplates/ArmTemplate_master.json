@@ -7,14 +7,30 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "mahimazuredatafactory"
 		},
+		"AzureBlobStorage_sourceemail_gc_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage_sourceemail_gc'"
+		},
 		"AzureDataLakeStorage1_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage1'"
+		},
+		"AzureDatabricksDeltaLake_gc_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'AzureDatabricksDeltaLake_gc'"
+		},
+		"AzureDatabricks_GC_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'AzureDatabricks_GC'"
 		},
 		"AzureSqlDatabase_param_LS_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase_param_LS'",
 			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=mahimservert1.database.windows.net;Initial Catalog=mahimdatabaset1;User ID=@{linkedService().userName};Password=@{linkedService().password}"
+		},
+		"AzureSqlDatabase_sink_gc_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase_sink_gc'"
 		},
 		"AzureSqlDatabase_source_gc_connectionString": {
 			"type": "secureString",
@@ -40,6 +56,10 @@
 		"AzureDataLakeStoragegeekcoders_properties_typeProperties_servicePrincipalId": {
 			"type": "string",
 			"defaultValue": "4f2571f6-d8dd-43a3-8928-fd0c4291ccd3"
+		},
+		"AzureDatabricks_GC_properties_typeProperties_existingClusterId": {
+			"type": "string",
+			"defaultValue": "0814-062318-82nvam7v"
 		},
 		"AzureKeyVault1_properties_typeProperties_baseUrl": {
 			"type": "string",
@@ -84,17 +104,32 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"AzureBlobStorage_sourceemail_gc_connectionString": {
+						"value": "[parameters('AzureBlobStorage_sourceemail_gc_connectionString')]"
+					},
 					"AzureDataLakeStorage1_accountKey": {
 						"value": "[parameters('AzureDataLakeStorage1_accountKey')]"
 					},
+					"AzureDatabricksDeltaLake_gc_accessToken": {
+						"value": "[parameters('AzureDatabricksDeltaLake_gc_accessToken')]"
+					},
+					"AzureDatabricks_GC_accessToken": {
+						"value": "[parameters('AzureDatabricks_GC_accessToken')]"
+					},
 					"AzureSqlDatabase_param_LS_connectionString": {
 						"value": "[parameters('AzureSqlDatabase_param_LS_connectionString')]"
+					},
+					"AzureSqlDatabase_sink_gc_connectionString": {
+						"value": "[parameters('AzureSqlDatabase_sink_gc_connectionString')]"
 					},
 					"mahim_SQL_DB_t1_connectionString": {
 						"value": "[parameters('mahim_SQL_DB_t1_connectionString')]"
 					},
 					"AzureDataLakeStorage1_properties_typeProperties_url": {
 						"value": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]"
+					},
+					"AzureDatabricks_GC_properties_typeProperties_existingClusterId": {
+						"value": "[parameters('AzureDatabricks_GC_properties_typeProperties_existingClusterId')]"
 					},
 					"AzureKeyVault1_properties_typeProperties_baseUrl": {
 						"value": "[parameters('AzureKeyVault1_properties_typeProperties_baseUrl')]"
@@ -194,6 +229,26 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'mahimazuredatafactory_ArmTemplate_3')]"
+			]
+		},
+		{
+			"name": "mahimazuredatafactory_ArmTemplate_5",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_5.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
 					},
 					"storagetrigger_properties_typeProperties_scope": {
 						"value": "[parameters('storagetrigger_properties_typeProperties_scope')]"
@@ -201,7 +256,7 @@
 				}
 			},
 			"dependsOn": [
-				"[resourceId('Microsoft.Resources/deployments', 'mahimazuredatafactory_ArmTemplate_3')]"
+				"[resourceId('Microsoft.Resources/deployments', 'mahimazuredatafactory_ArmTemplate_4')]"
 			]
 		}
 	]
