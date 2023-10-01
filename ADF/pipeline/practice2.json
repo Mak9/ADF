@@ -1,0 +1,50 @@
+{
+	"name": "practice2",
+	"properties": {
+		"activities": [
+			{
+				"name": "start",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "start",
+					"value": {
+						"value": "trigger().outputs.windowStartTime",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "end",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "end",
+					"value": {
+						"value": "trigger().outputs.windowEndTime",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"variables": {
+			"start": {
+				"type": "String"
+			},
+			"end": {
+				"type": "String"
+			}
+		},
+		"annotations": []
+	}
+}
