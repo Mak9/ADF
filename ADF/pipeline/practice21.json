@@ -39,12 +39,10 @@
 		],
 		"parameters": {
 			"startp": {
-				"type": "string",
-				"defaultValue": "@trigger().outputs.windowStartTime"
+				"type": "string"
 			},
 			"endp": {
-				"type": "string",
-				"defaultValue": "@trigger().outputs.windowEndTime"
+				"type": "string"
 			}
 		},
 		"variables": {
