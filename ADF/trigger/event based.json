@@ -1,0 +1,31 @@
+{
+	"name": "event based",
+	"properties": {
+		"annotations": [
+			"event"
+		],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "practice21",
+					"type": "PipelineReference"
+				},
+				"parameters": {
+					"startp": "123",
+					"endp": "123"
+				}
+			}
+		],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/landing/blobs/India/",
+			"blobPathEndsWith": ".json",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/1ac442b9-ef2b-4b60-ad29-39ffe3d77f0c/resourceGroups/mahim_RG/providers/Microsoft.Storage/storageAccounts/mahimstorageaccount",
+			"events": [
+				"Microsoft.Storage.BlobCreated"
+			]
+		}
+	}
+}
