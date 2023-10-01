@@ -30,6 +30,7 @@
 					],
 					"storeSettings": {
 						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
 						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
@@ -168,6 +169,14 @@
 				}
 			}
 		],
+		"variables": {
+			"start": {
+				"type": "String"
+			},
+			"end": {
+				"type": "String"
+			}
+		},
 		"annotations": []
 	}
 }
