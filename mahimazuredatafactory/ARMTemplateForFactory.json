@@ -73,13 +73,17 @@
 			"type": "string",
 			"defaultValue": "https://airlabs.co/api/v9/airlines"
 		},
-		"tumbling_properties_pipeline_parameters_startp": {
+		"event based_properties_practice21_parameters_startp": {
 			"type": "string",
-			"defaultValue": "@trigger.outputs.windowStartTime"
+			"defaultValue": "123"
 		},
-		"tumbling_properties_pipeline_parameters_endp": {
+		"event based_properties_practice21_parameters_endp": {
 			"type": "string",
-			"defaultValue": "@trigger.outputs.windowEndTime"
+			"defaultValue": "123"
+		},
+		"event based_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/1ac442b9-ef2b-4b60-ad29-39ffe3d77f0c/resourceGroups/mahim_RG/providers/Microsoft.Storage/storageAccounts/mahimstorageaccount"
 		}
 	},
 	"variables": {
@@ -6855,43 +6859,6 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/tumbling')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [
-					"test2"
-				],
-				"runtimeState": "Stopped",
-				"pipeline": {
-					"pipelineReference": {
-						"referenceName": "practice21",
-						"type": "PipelineReference"
-					},
-					"parameters": {
-						"startp": "[parameters('tumbling_properties_pipeline_parameters_startp')]",
-						"endp": "[parameters('tumbling_properties_pipeline_parameters_endp')]"
-					}
-				},
-				"type": "TumblingWindowTrigger",
-				"typeProperties": {
-					"frequency": "Hour",
-					"interval": 1,
-					"startTime": "2023-09-15T00:00:00Z",
-					"endTime": "2023-09-17T08:08:00Z",
-					"delay": "00:00:00",
-					"maxConcurrency": 50,
-					"retryPolicy": {
-						"intervalInSeconds": 30
-					},
-					"dependsOn": []
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/practice21')]"
-			]
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/SCD2')]",
 			"type": "Microsoft.DataFactory/factories/dataflows",
 			"apiVersion": "2018-06-01",
@@ -7594,6 +7561,42 @@
 				"[concat(variables('factoryId'), '/datasets/DelimitedText4')]",
 				"[concat(variables('factoryId'), '/datasets/saveasJSON')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/event based')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [
+					"event"
+				],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "practice21",
+							"type": "PipelineReference"
+						},
+						"parameters": {
+							"startp": "[parameters('event based_properties_practice21_parameters_startp')]",
+							"endp": "[parameters('event based_properties_practice21_parameters_endp')]"
+						}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/landing/blobs/India/",
+					"blobPathEndsWith": ".json",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('event based_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/practice21')]"
 			]
 		}
 	]

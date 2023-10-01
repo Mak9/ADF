@@ -53,11 +53,14 @@
 		"RestService_source_gc_properties_typeProperties_url": {
 			"value": "https://airlabs.co/api/v9/airlines"
 		},
-		"tumbling_properties_pipeline_parameters_startp": {
-			"value": "@trigger.outputs.windowStartTime"
+		"event based_properties_practice21_parameters_startp": {
+			"value": "123"
 		},
-		"tumbling_properties_pipeline_parameters_endp": {
-			"value": "@trigger.outputs.windowEndTime"
+		"event based_properties_practice21_parameters_endp": {
+			"value": "123"
+		},
+		"event based_properties_typeProperties_scope": {
+			"value": "/subscriptions/1ac442b9-ef2b-4b60-ad29-39ffe3d77f0c/resourceGroups/mahim_RG/providers/Microsoft.Storage/storageAccounts/mahimstorageaccount"
 		}
 	}
 }

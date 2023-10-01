@@ -73,13 +73,17 @@
 			"type": "string",
 			"defaultValue": "https://airlabs.co/api/v9/airlines"
 		},
-		"tumbling_properties_pipeline_parameters_startp": {
+		"event based_properties_practice21_parameters_startp": {
 			"type": "string",
-			"defaultValue": "@trigger.outputs.windowStartTime"
+			"defaultValue": "123"
 		},
-		"tumbling_properties_pipeline_parameters_endp": {
+		"event based_properties_practice21_parameters_endp": {
 			"type": "string",
-			"defaultValue": "@trigger.outputs.windowEndTime"
+			"defaultValue": "123"
+		},
+		"event based_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/1ac442b9-ef2b-4b60-ad29-39ffe3d77f0c/resourceGroups/mahim_RG/providers/Microsoft.Storage/storageAccounts/mahimstorageaccount"
 		},
 		"containerUri": {
 			"type": "string",
@@ -194,11 +198,14 @@
 					"AzureDataLakeStoragegeekcoders_properties_typeProperties_servicePrincipalId": {
 						"value": "[parameters('AzureDataLakeStoragegeekcoders_properties_typeProperties_servicePrincipalId')]"
 					},
-					"tumbling_properties_pipeline_parameters_startp": {
-						"value": "[parameters('tumbling_properties_pipeline_parameters_startp')]"
+					"event based_properties_practice21_parameters_startp": {
+						"value": "[parameters('event based_properties_practice21_parameters_startp')]"
 					},
-					"tumbling_properties_pipeline_parameters_endp": {
-						"value": "[parameters('tumbling_properties_pipeline_parameters_endp')]"
+					"event based_properties_practice21_parameters_endp": {
+						"value": "[parameters('event based_properties_practice21_parameters_endp')]"
+					},
+					"event based_properties_typeProperties_scope": {
+						"value": "[parameters('event based_properties_typeProperties_scope')]"
 					}
 				}
 			},
