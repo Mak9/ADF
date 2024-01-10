@@ -10,8 +10,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"folderPath": "testing",
-				"fileSystem": "landing"
+				"fileName": "AIRPORT.csv",
+				"fileSystem": "airport"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",

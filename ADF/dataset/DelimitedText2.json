@@ -10,12 +10,12 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "Threshold-7jx0HSPeGT.txt",
-				"fileSystem": "landing"
+				"fileSystem": "bronze"
 			},
-			"columnDelimiter": ",",
+			"columnDelimiter": "|",
 			"escapeChar": "\\",
-			"quoteChar": "\""
+			"firstRowAsHeader": true,
+			"quoteChar": ""
 		},
 		"schema": [
 			{
