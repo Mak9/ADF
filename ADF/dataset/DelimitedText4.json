@@ -10,8 +10,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "SalesLT.CustomerAddress-dbNoOry0ZP.txt",
-				"folderPath": "upload",
+				"fileName": "SalesLT.Product-Iyt6QPQsBf.txt",
+				"folderPath": "assignment8",
 				"fileSystem": "landing"
 			},
 			"columnDelimiter": ",",
