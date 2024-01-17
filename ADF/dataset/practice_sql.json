@@ -5,27 +5,12 @@
 			"referenceName": "mahim_SQL_DB_t1",
 			"type": "LinkedServiceReference"
 		},
-		"parameters": {
-			"schema": {
-				"type": "string",
-				"defaultValue": "saleslt"
-			},
-			"tablename": {
-				"type": "string"
-			}
-		},
 		"annotations": [],
 		"type": "AzureSqlTable",
 		"schema": [],
 		"typeProperties": {
-			"schema": {
-				"value": "@dataset().schema",
-				"type": "Expression"
-			},
-			"table": {
-				"value": "@dataset().tablename",
-				"type": "Expression"
-			}
+			"schema": "dbo",
+			"table": "test"
 		}
 	}
 }

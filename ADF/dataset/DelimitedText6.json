@@ -10,9 +10,9 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "SalesLT.Product-Iyt6QPQsBf.txt",
-				"folderPath": "upload",
-				"fileSystem": "landing"
+				"fileName": "AIRPORT.csv",
+				"folderPath": "dir1",
+				"fileSystem": "airport"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
