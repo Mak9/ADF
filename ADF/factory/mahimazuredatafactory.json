@@ -3,7 +3,7 @@
 	"properties": {
 		"globalConfigurations": {
 			"PipelineBillingEnabled": "false",
-			"factoryStagingLSReferenceName": "AzureBlobStorage_sourceemail_gc",
+			"factoryStagingLSReferenceName": "AzureDataLakeStorage1",
 			"factoryStagingLSType": "LinkedServiceReference"
 		}
 	},
