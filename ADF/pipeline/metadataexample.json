@@ -1,6 +1,17 @@
 {
 	"name": "metadataexample",
 	"properties": {
+		"activities": [
+			{
+				"name": "Wait1",
+				"type": "Wait",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"waitTimeInSeconds": 1
+				}
+			}
+		],
 		"annotations": [],
 		"lastPublishTime": "2023-04-07T06:01:39Z"
 	},
